@@ -6,6 +6,7 @@ RUN_FILE=".$(basename ${DIR})"
 README_MD_FILE="README.md"
 
 # Include plugins
+. ${DIR}/authors.bash
 . ${DIR}/reset_readme.bash
 
 # Run scripts

@@ -7,6 +7,7 @@ README_MD_FILE="README.md"
 
 # Include plugins
 . ${DIR}/authors.bash
+. ${DIR}/donation.bash
 . ${DIR}/license.bash
 . ${DIR}/reset_readme.bash
 

@@ -8,12 +8,12 @@ README_MD_FILE="README.md"
 # Include plugins
 . ${DIR}/authors.bash
 . ${DIR}/donation.bash
+. ${DIR}/git.bash
 . ${DIR}/license.bash
 . ${DIR}/reset_readme.bash
 
-# Run scripts
-for RUN_FILE_PATH in ${DIR}/../*/${RUN_FILE}; do (
-  cd $(dirname ${RUN_FILE_PATH})
+# Run script
+if [[ -e "${RUN_FILE}" ]]; then (
   reset_readme
   . ${RUN_FILE}
-); done
+); fi

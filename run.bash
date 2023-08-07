@@ -12,8 +12,9 @@ README_MD_FILE="README.md"
 . ${DIR}/license.bash
 . ${DIR}/reset_readme.bash
 
-# Run script
-if [[ -e "${RUN_FILE}" ]]; then (
+# Run scripts
+for RUN_FILE_PATH in ${DIR}/../*/${RUN_FILE}; do (
+  cd $(dirname ${RUN_FILE_PATH})
   reset_readme
   . ${RUN_FILE}
-); fi
+); done

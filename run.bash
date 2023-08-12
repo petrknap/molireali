@@ -9,6 +9,7 @@ README_MD_FILE="README.md"
 . ${DIR}/authors.bash
 . ${DIR}/donation.bash
 . ${DIR}/git.bash
+. ${DIR}/github.bash
 . ${DIR}/license.bash
 . ${DIR}/reset_readme.bash
 

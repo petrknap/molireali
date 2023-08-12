@@ -1,0 +1,13 @@
+name: Bash Linter
+
+on:
+  pull_request:
+    paths:
+      - '**.bash'
+
+jobs:
+  ShellCheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: shellcheck **.bash

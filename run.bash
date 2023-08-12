@@ -1,21 +1,22 @@
 #!/usr/bin/env bash
 set -e
 
-DIR="$(realpath ${BASH_SOURCE%/*})"
-RUN_FILE=".$(basename ${DIR})"
+DIR="$(realpath "${BASH_SOURCE%/*}")"
+RUN_FILE=".molireali"
 README_MD_FILE="README.md"
 
 # Include plugins
-. ${DIR}/authors.bash
-. ${DIR}/donation.bash
-. ${DIR}/git.bash
-. ${DIR}/github.bash
-. ${DIR}/license.bash
-. ${DIR}/reset_readme.bash
+. "${DIR}"/authors.bash
+. "${DIR}"/donation.bash
+. "${DIR}"/git.bash
+. "${DIR}"/github.bash
+. "${DIR}"/license.bash
+. "${DIR}"/reset_readme.bash
 
 # Run scripts
-for RUN_FILE_PATH in ${DIR}/../*/${RUN_FILE}; do (
-  cd $(dirname ${RUN_FILE_PATH})
+for RUN_FILE_PATH in "${DIR}"/../*/"${RUN_FILE}"; do (
+  cd "$(dirname "${RUN_FILE_PATH}")"
   reset_readme
-  . ${RUN_FILE}
+   # shellcheck disable=SC1090
+  . "${RUN_FILE}"
 ); done

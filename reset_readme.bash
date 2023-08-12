@@ -10,7 +10,9 @@ function reset_readme {
   remove_tail # ---
   remove_tail # \n
 
-  echo "" >> "${README_MD_FILE}"
-  echo "---" >> "${README_MD_FILE}"
-  echo "" >> "${README_MD_FILE}"
+  {
+    echo ""
+    echo "---"
+    echo ""
+  } >> "${README_MD_FILE}"
 }

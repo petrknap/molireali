@@ -1,3 +1,4 @@
 authors
 github-workflow linter-bash
+github-workflow linter-python 3
 license LGPL-3.0-or-later

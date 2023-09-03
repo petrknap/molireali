@@ -1,7 +1,8 @@
-FROM php
+FROM php:cli
 
-RUN apt update \
- && apt install -y \
+# hadolint ignore=DL3008
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
       git \
       unzip \
  && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
@@ -10,4 +11,6 @@ RUN apt update \
  && php composer-setup.php \
  && php -r "unlink('composer-setup.php'); unlink('composer-setup.php.sig');" \
  && mv composer.phar /usr/local/bin/composer \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* \
 ;

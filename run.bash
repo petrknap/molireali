@@ -8,6 +8,7 @@ README_MD_FILE="README.md"
 # Include plugins
 . "${DIR}"/authors.bash
 . "${DIR}"/composer.bash
+. "${DIR}"/docker.bash
 . "${DIR}"/donation.bash
 . "${DIR}"/git.bash
 . "${DIR}"/github.bash

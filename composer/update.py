@@ -18,6 +18,24 @@ def update_composer_file(path: str, namespace: str, php_version: str, license_sh
         data = json.loads(content)
         data_require = data.get('require', {})
         data_require.update({'php': f'>={php_version}'})
+        data_require_dev = data.get('require-dev', {})
+        data_require_dev.update({
+            'nunomaduro/phpinsights': '^2.9',
+            'phpstan/phpstan': '^1.10',
+            'squizlabs/php_codesniffer': '^3.7',
+        })
+        data_scripts = data.get('scripts', {})
+        data_scripts.update({
+            'validate': [
+                'phpcs --colors --standard=PSR12 --exclude=PSR12.Files.OpenTag,PSR12.Files.FileHeader,Generic.Files.LineLength src tests',
+                'phpstan analyse --level max src', 'phpstan analyse --level 5 tests',
+                'phpinsights analyse src'
+            ],
+            'ci-script': [
+                '@validate',
+                '@test'
+            ]
+        })
         data = {
             'WARNING': 'This file is updated automatically. All keys will be overwritten, '
                        "except of 'conflict', 'keywords', 'require', 'require-dev' and 'scripts'.",
@@ -28,12 +46,16 @@ def update_composer_file(path: str, namespace: str, php_version: str, license_sh
             },
             'autoload-dev': {
                 'psr-4': {
-                    f'{namespace}\\Test\\': 'tests',
+                    f'{namespace}\\': 'tests',
                 },
+            },
+            'config': {
+                'allow-plugins': False,
+                'sort-packages': True,
             },
             'conflict': data.get('conflict', {}),
             'description': short_description,
-            'funding': [
+            'funding': [  # TODO load from .github/FUNDING.yaml
                 {
                     'type': 'other',
                     'url': 'https://petrknap.github.io/donate.html',
@@ -44,8 +66,8 @@ def update_composer_file(path: str, namespace: str, php_version: str, license_sh
             'license': license_shortcut,
             'name': f'{name[0].lower()}/{camel_case_to_dashed(name[1])}',
             'require': data_require,
-            'require-dev': data.get('require-dev', {}),
-            'scripts': data.get('scripts', {}),
+            'require-dev': data_require_dev,
+            'scripts': data_scripts,
         }
         file.seek(0)
         file.truncate(0)

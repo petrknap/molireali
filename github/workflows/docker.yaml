@@ -1,12 +1,13 @@
-name: Docker
+name: $1
 
 on:
   pull_request:
 
 jobs:
-  build-and-run:
+  run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: docker build -t image:$GITHUB_SHA .
-      - run: docker run image:$GITHUB_SHA $1
+      - run: docker build -t $GITHUB_REPOSITORY:$GITHUB_SHA .
+      - name: Run $1
+        run: docker run $GITHUB_REPOSITORY:$GITHUB_SHA $1

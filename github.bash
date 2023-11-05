@@ -7,6 +7,6 @@ function github-workflow {
 
   mkdir --parent "${WORKFLOW_DIRECTORY}" || true
   WORKFLOW_CONTENT="$(cat "${DIR}/${WORKFLOW_DIRECTORY#?}/${WORKFLOW}.yaml")"
-  WORKFLOW_CONTENT="${WORKFLOW_CONTENT/\$1/$WORKFLOW_ARG1}"
+  WORKFLOW_CONTENT="$(echo "${WORKFLOW_CONTENT}" | sed "s/\$1/${WORKFLOW_ARG1}/g")"
   echo "${WORKFLOW_CONTENT}" > "${WORKFLOW_DIRECTORY}/${WORKFLOW}.yaml"
 }

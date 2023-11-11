@@ -61,7 +61,7 @@ def update_composer_file(path: str, namespace: str, php_version: str, license_sh
                     'url': 'https://petrknap.github.io/donate.html',
                 },
             ],
-            'homepage': f'https://github.com/{name[0].lower()}/php-{name[1].lower()}',
+            'homepage': f'https://github.com/{name[0].lower()}/php-{camel_case_to_dashed(name[1])}',
             'keywords': data.get('keywords', []),
             'license': license_shortcut,
             'name': f'{name[0].lower()}/{camel_case_to_dashed(name[1])}',

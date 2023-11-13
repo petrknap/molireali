@@ -11,7 +11,7 @@ def camel_case_to_dashed(string: str) -> str:
     ).lower()
 
 
-def update_composer_file(path: str, namespace: str, php_version: str, license_shortcut: str, short_description: str) -> None:
+def update_composer_file(path: str, namespace: str, type: str, php_version: str, license_shortcut: str, short_description: str) -> None:
     name = namespace.split('\\', 1)
     with open(path, 'r+') as file:
         content = file.read()
@@ -68,6 +68,7 @@ def update_composer_file(path: str, namespace: str, php_version: str, license_sh
             'require': data_require,
             'require-dev': data_require_dev,
             'scripts': data_scripts,
+            'type': type if type != '' else None,
         }
         file.seek(0)
         file.truncate(0)
@@ -82,9 +83,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--file', type=str, required=True, help='Path to Composer file')
     parser.add_argument('--namespace', type=str, required=True, help='Base namespace')
+    parser.add_argument('--type', type=str, required=True, help='Type of the package')
     parser.add_argument('--php', type=str, required=True, help='Minimal required version of PHP')
     parser.add_argument('--license', type=str, required=True, help='License shortcut (MIT, LGPL-3.0-or-later)')
     parser.add_argument('--description', type=str, required=True, help='Short description')
     args = parser.parse_args()
 
-    update_composer_file(args.file, args.namespace, args.php, args.license, args.description)
+    update_composer_file(args.file, args.namespace, args.type, args.php, args.license, args.description)

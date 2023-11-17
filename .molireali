@@ -1,6 +1,6 @@
 authors
 git-crlf "*.bat"
-github-workflow linter-bash
 github-workflow linter-docker
 github-workflow linter-python 3
+github-workflow linter-shell
 license LGPL-3.0-or-later

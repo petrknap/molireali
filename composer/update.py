@@ -36,9 +36,10 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
                 '@test'
             ]
         })
+        data_suggest = data.get('suggest', {})
         data = {
             'WARNING': 'This file is updated automatically. All keys will be overwritten, '
-                       "except of 'conflict', 'keywords', 'require', 'require-dev' and 'scripts'.",
+                       "except of 'conflict', 'keywords', 'require', 'require-dev', 'scripts' and 'suggest'.",
             'autoload': {
                 'psr-4': {
                     f'{namespace}\\': 'src'
@@ -68,6 +69,7 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
             'require': data_require,
             'require-dev': data_require_dev,
             'scripts': data_scripts,
+            'suggest': data_suggest,
             'type': type if type != '' else None,
         }
         file.seek(0)

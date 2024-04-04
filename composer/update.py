@@ -20,25 +20,26 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
         data_require.update({'php': f'>={php_version}'})
         data_require_dev = data.get('require-dev', {})
         data_require_dev.update({
-            'nunomaduro/phpinsights': '^2.9',
+            'nunomaduro/phpinsights': '^2.11',
             'phpstan/phpstan': '^1.10',
             'squizlabs/php_codesniffer': '^3.7',
         })
         data_scripts = data.get('scripts', {})
         data_scripts.update({
             'validate': [
-                'phpcs --colors --standard=PSR12 --exclude=PSR12.Files.OpenTag,PSR12.Files.FileHeader,Generic.Files.LineLength src tests',
+                'phpcs --colors --standard=PSR12 --exclude=Generic.Files.LineLength src tests',
                 'phpstan analyse --level max src', 'phpstan analyse --level 5 tests',
-                'phpinsights analyse src'
+                'phpinsights analyse src --ansi --no-interaction'
             ],
             'ci-script': [
                 '@validate',
                 '@test'
             ]
         })
+        data_suggest = data.get('suggest', {})
         data = {
             'WARNING': 'This file is updated automatically. All keys will be overwritten, '
-                       "except of 'conflict', 'keywords', 'require', 'require-dev' and 'scripts'.",
+                       "except of 'conflict', 'keywords', 'require', 'require-dev', 'scripts' and 'suggest'.",
             'autoload': {
                 'psr-4': {
                     f'{namespace}\\': 'src'
@@ -68,6 +69,7 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
             'require': data_require,
             'require-dev': data_require_dev,
             'scripts': data_scripts,
+            'suggest': data_suggest,
             'type': type if type != '' else None,
         }
         file.seek(0)

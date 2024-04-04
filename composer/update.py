@@ -20,7 +20,7 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
         data_require.update({'php': f'>={php_version}'})
         data_require_dev = data.get('require-dev', {})
         data_require_dev.update({
-            'nunomaduro/phpinsights': '^2.9',
+            'nunomaduro/phpinsights': '^2.11',
             'phpstan/phpstan': '^1.10',
             'squizlabs/php_codesniffer': '^3.7',
         })

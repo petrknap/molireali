@@ -29,7 +29,7 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
             'validate': [
                 'phpcs --colors --standard=PSR12 --exclude=Generic.Files.LineLength src tests',
                 'phpstan analyse --level max src', 'phpstan analyse --level 5 tests',
-                'phpinsights analyse src'
+                'phpinsights analyse src --ansi --no-interaction'
             ],
             'ci-script': [
                 '@validate',

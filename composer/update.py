@@ -27,6 +27,7 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
         data_scripts = data.get('scripts', {})
         data_scripts.update({
             'validate': [
+                'composer outdated "petrknap/*" --major-only --strict --ansi --no-interaction',
                 'phpcs --colors --standard=PSR12 --exclude=Generic.Files.LineLength src tests',
                 'phpstan analyse --level max src', 'phpstan analyse --level 5 tests',
                 'phpinsights analyse src --ansi --no-interaction'

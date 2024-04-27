@@ -16,7 +16,7 @@ README_MD_FILE="README.md"
 . "${DIR}"/reset_readme.bash
 
 # Run scripts
-for RUN_FILE_PATH in "${DIR}"/../*/"${RUN_FILE}"; do (
+for RUN_FILE_PATH in "${DIR}"/*/"${RUN_FILE}" "${DIR}"/../*/"${RUN_FILE}"; do (
   echo "Processing \"$(realpath "${RUN_FILE_PATH}")\""
   cd "$(dirname "${RUN_FILE_PATH}")"
   reset_readme

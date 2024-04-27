@@ -17,4 +17,9 @@ function composer {
   )"
 
   echo "Run \`composer require ${COMPOSER_NAME}\` to install it." >> "${README_MD_FILE}"
+
+  if [[ "${TYPE}" == '' || "${TYPE}" == 'library' ]]; then (
+    # shellcheck disable=SC1091
+    . "${DIR}/composer/bin/run.bash" composer require "${COMPOSER_NAME}" "*"
+  ); fi
 }

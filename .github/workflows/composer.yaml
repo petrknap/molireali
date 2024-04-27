@@ -1,0 +1,15 @@
+name: Composer CI
+
+on:
+  pull_request:
+    paths:
+      - 'composer/**'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker build -t $GITHUB_REPOSITORY-composer:$GITHUB_SHA ./composer
+      - name: Run composer ci-script
+        run: docker run -v ./composer:/app $GITHUB_REPOSITORY-composer:$GITHUB_SHA composer test

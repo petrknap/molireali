@@ -1,0 +1,4 @@
+composer PetrKnap\\Molireali metapackage
+dockerfile php 8.1-cli
+docker-scripts petrknap/php-molireali
+github-workflow linter-php 8.1

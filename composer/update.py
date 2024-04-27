@@ -26,15 +26,22 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
         })
         data_scripts = data.get('scripts', {})
         data_scripts.update({
-            'validate': [
-                'composer outdated "petrknap/*" --major-only --strict --ansi --no-interaction',
+            'check-requirements': [
+                'composer outdated "petrknap/*" --major-only --strict --ansi --no-interaction'
+            ],
+            'check-implementation': [
                 'phpcs --colors --standard=PSR12 --exclude=Generic.Files.LineLength src tests',
-                'phpstan analyse --level max src', 'phpstan analyse --level 5 tests',
+                'phpstan analyse --level max src --ansi --no-interaction',
+                'phpstan analyse --level 5 tests --ansi --no-interaction',
                 'phpinsights analyse src --ansi --no-interaction'
             ],
-            'ci-script': [
-                '@validate',
+            'test-implementation': [
                 '@test'
+            ],
+            'ci-script': [
+                '@check-requirements',
+                '@check-implementation',
+                '@test-implementation'
             ]
         })
         data_suggest = data.get('suggest', {})

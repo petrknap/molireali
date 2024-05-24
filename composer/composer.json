@@ -30,6 +30,7 @@
     "petrknap/binary": "*",
     "petrknap/critical-section": "*",
     "petrknap/crypto-sodium": "*",
+    "petrknap/optional": "*",
     "petrknap/shorts": "*",
     "petrknap/singleton": "*"
   },

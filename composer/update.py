@@ -27,7 +27,7 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
         data_require_dev = data.get('require-dev', {})
         data_require_dev.update({
             'nunomaduro/phpinsights': '^2.11',
-            'phpstan/phpstan': '^1.10',
+            'phpstan/phpstan': '^1.12',
             'squizlabs/php_codesniffer': '^3.7',
         })
         data_scripts = data.get('scripts', {})

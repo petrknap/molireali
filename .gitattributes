@@ -1,1 +1,3 @@
 *.bat text eol=crlf
+.github export-ignore
+.molireali export-ignore

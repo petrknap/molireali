@@ -20,6 +20,8 @@ function composer {
 
   if [[ "${TYPE}" == '' || "${TYPE}" == 'library' ]]; then (
     # shellcheck disable=SC1091
-    . "${DIR}/composer/bin/run.bash" composer require "${COMPOSER_NAME}" "*"
+    . "${DIR}/composer/bin/run.bash" composer require "${COMPOSER_NAME}" "*" || true
   ); fi
+
+  git-export-ignore tests
 }

@@ -9,6 +9,8 @@ function dockerfile {
     --image "${IMAGE}:${TAG}" \
     --includes "${DIR}/docker/${IMAGE}" \
   ;
+
+  git-export-ignore Dockerfile
 }
 
 function docker-scripts {
@@ -24,4 +26,6 @@ function docker-scripts {
     echo "${TERMINAL_FILE_CONTENT}" > "${TERMINAL_FILE_TARGET}"
     chmod +x "${TERMINAL_FILE_TARGET}"
   ); done
+
+  git-export-ignore bin
 }

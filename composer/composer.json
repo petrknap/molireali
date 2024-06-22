@@ -43,7 +43,8 @@
   "scripts": {
     "test": [
       "composer update",
-      "@check-requirements"
+      "@check-requirements",
+      "composer audit"
     ],
     "check-requirements": [
       "composer outdated \"petrknap/*\" --major-only --strict --ansi --no-interaction"

@@ -44,7 +44,7 @@
     "test": [
       "composer update",
       "@check-requirements",
-      "composer audit"
+      "composer audit --ansi --no-interaction"
     ],
     "check-requirements": [
       "composer outdated \"petrknap/*\" --major-only --strict --ansi --no-interaction"

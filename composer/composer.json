@@ -32,7 +32,8 @@
     "petrknap/crypto-sodium": "*",
     "petrknap/optional": "*",
     "petrknap/shorts": "*",
-    "petrknap/singleton": "*"
+    "petrknap/singleton": "*",
+    "petrknap/spayd-qr": "*"
   },
   "require-dev": {
     "nunomaduro/phpinsights": "^2.11",

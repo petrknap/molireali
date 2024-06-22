@@ -9,9 +9,9 @@ function git-crlf {
 }
 
 function git-export-ignore {
-  PATTERN="${1}"
+  IGNORED="${1}"
 
   touch .gitattributes
-  sed -i "/^${PATTERN} export-ignore/d" .gitattributes
-  echo "${PATTERN} export-ignore" >> .gitattributes
+  sed -i "/^${IGNORED} export-ignore/d" .gitattributes
+  echo "${IGNORED} export-ignore" >> .gitattributes
 }

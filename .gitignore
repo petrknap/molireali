@@ -1,5 +1,6 @@
 /composer/.github/
 /composer/bin/
 /composer/vendor/
+/composer/.gitattributes
 /composer/composer.lock
 /composer/README.md

@@ -30,8 +30,11 @@
     "petrknap/binary": "*",
     "petrknap/critical-section": "*",
     "petrknap/crypto-sodium": "*",
+    "petrknap/optional": "*",
+    "petrknap/profiler": "*",
     "petrknap/shorts": "*",
-    "petrknap/singleton": "*"
+    "petrknap/singleton": "*",
+    "petrknap/spayd-qr": "*"
   },
   "require-dev": {
     "nunomaduro/phpinsights": "^2.11",
@@ -44,6 +47,7 @@
       "@check-requirements"
     ],
     "check-requirements": [
+      "composer update \"petrknap/*\"",
       "composer outdated \"petrknap/*\" --major-only --strict --ansi --no-interaction"
     ],
     "check-implementation": [
@@ -56,8 +60,8 @@
       "@test"
     ],
     "ci-script": [
-      "@check-requirements",
       "@check-implementation",
+      "@check-requirements",
       "@test-implementation"
     ]
   },

@@ -16,6 +16,12 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
     with open(path, 'r+') as file:
         content = file.read()
         data = json.loads(content)
+        data_autoload = data.get('autoload', {})
+        data_autoload.update({
+            'psr-4': {
+                f'{namespace}\\': 'src',
+            },
+        })
         data_require = data.get('require', {})
         data_require.update({'php': f'>={php_version}'})
         data_require_dev = data.get('require-dev', {})
@@ -26,21 +32,22 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
         })
         data_scripts = data.get('scripts', {})
         data_scripts.update({
-            'check-requirements': [
-                'composer outdated "petrknap/*" --major-only --strict --ansi --no-interaction'
-            ],
             'check-implementation': [
                 'phpcs --colors --standard=PSR12 --exclude=Generic.Files.LineLength src tests',
                 'phpstan analyse --level max src --ansi --no-interaction',
                 'phpstan analyse --level 5 tests --ansi --no-interaction',
                 'phpinsights analyse src --ansi --no-interaction'
             ],
+            'check-requirements': [
+                'composer update "petrknap/*"',
+                'composer outdated "petrknap/*" --major-only --strict --ansi --no-interaction'
+            ],
             'test-implementation': [
                 '@test'
             ],
             'ci-script': [
-                '@check-requirements',
                 '@check-implementation',
+                '@check-requirements',
                 '@test-implementation'
             ]
         })
@@ -48,11 +55,7 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
         data = {
             'WARNING': 'This file is updated automatically. All keys will be overwritten, '
                        "except of 'conflict', 'keywords', 'require', 'require-dev', 'scripts' and 'suggest'.",
-            'autoload': {
-                'psr-4': {
-                    f'{namespace}\\': 'src'
-                },
-            },
+            'autoload': data_autoload,
             'autoload-dev': {
                 'psr-4': {
                     f'{namespace}\\': 'tests',

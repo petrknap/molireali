@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+function github-templates {
+  GITHUB_DIRECTORY=".github"
+
+  mkdir --parent "${GITHUB_DIRECTORY}" || true
+  for TEMPLATE in "${DIR}/${GITHUB_DIRECTORY#?}/"*.md; do (
+    cat "${TEMPLATE}" > "${GITHUB_DIRECTORY}/$(basename "${TEMPLATE}")"
+  ); done
+}
+
 function github-workflow {
   WORKFLOW="${1}"
   WORKFLOW_ARG1="${2}"

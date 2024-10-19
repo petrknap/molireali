@@ -22,4 +22,6 @@ for RUN_FILE_PATH in "${DIR}"/*/"${RUN_FILE}" "${DIR}"/../*/"${RUN_FILE}"; do (
   reset_readme
    # shellcheck disable=SC1090
   . "${RUN_FILE}"
+
+  git-export-ignore "${RUN_FILE}"
 ); done

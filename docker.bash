@@ -18,14 +18,14 @@ function docker-scripts {
   WORKDIR="$(grep WORKDIR Dockerfile | cut -d ' ' -f 2)"
 
   mkdir "bin" || true
-  for TERMINAL_FILE in "${DIR}/docker/"{build,run}.*; do (
+  for TERMINAL_FILE in "${DIR}/docker/"{build,run}.{bash,bat}; do (
     TERMINAL_FILE_TARGET="bin/$(basename "${TERMINAL_FILE}")"
     TERMINAL_FILE_CONTENT="$(cat "${TERMINAL_FILE}")"
     TERMINAL_FILE_CONTENT="${TERMINAL_FILE_CONTENT/\$IMAGE/$IMAGE}"
     TERMINAL_FILE_CONTENT="${TERMINAL_FILE_CONTENT/\$WORKDIR/$WORKDIR}"
     echo "${TERMINAL_FILE_CONTENT}" > "${TERMINAL_FILE_TARGET}"
-    chmod +x "${TERMINAL_FILE_TARGET}"
   ); done
+  chmod +x "bin/"*.bash
 
   git-export-ignore bin
 }

@@ -31,24 +31,33 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
             'squizlabs/php_codesniffer': '^3.7',
         })
         data_scripts = data.get('scripts', {})
+        if data_scripts.get('test', '') == '@test-implementation':
+            data_scripts_test_implementation = [
+                'phpunit --colors=always --testdox tests',
+            ]
+            data_require_dev.update({
+                'phpunit/phpunit': '^10.5',
+            })
+        else:
+            data_scripts_test_implementation = [
+                '@test',
+            ]
         data_scripts.update({
             'check-implementation': [
                 'phpcs --colors --standard=PSR12 --exclude=Generic.Files.LineLength src tests',
                 'phpstan analyse --level max src --ansi --no-interaction',
                 'phpstan analyse --level 5 tests --ansi --no-interaction',
-                'phpinsights analyse src --ansi --no-interaction'
+                'phpinsights analyse src --ansi --no-interaction',
             ],
             'check-requirements': [
                 'composer update "petrknap/*"',
-                'composer outdated "petrknap/*" --major-only --strict --ansi --no-interaction'
+                'composer outdated "petrknap/*" --major-only --strict --ansi --no-interaction',
             ],
-            'test-implementation': [
-                '@test'
-            ],
+            'test-implementation': data_scripts_test_implementation,
             'ci-script': [
                 '@check-implementation',
                 '@check-requirements',
-                '@test-implementation'
+                '@test-implementation',
             ]
         })
         data_suggest = data.get('suggest', {})

@@ -47,7 +47,7 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
                 'phpcs --colors --standard=PSR12 --exclude=Generic.Files.LineLength src tests',
                 'phpstan analyse --level max src --ansi --no-interaction',
                 'phpstan analyse --level 5 tests --ansi --no-interaction',
-                'phpinsights analyse src --ansi --no-interaction',
+                'phpinsights analyse src tests --ansi --no-interaction --format=github-action | sed -e "s#::error file=$PWD/#::notice file=#g"',
             ],
             'check-requirements': [
                 'composer update "petrknap/*"',
@@ -62,8 +62,6 @@ def update_composer_file(path: str, namespace: str, type: str, php_version: str,
         })
         data_suggest = data.get('suggest', {})
         data = {
-            'WARNING': 'This file is updated automatically. All keys will be overwritten, '
-                       "except of 'conflict', 'keywords', 'require', 'require-dev', 'scripts' and 'suggest'.",
             'autoload': data_autoload,
             'autoload-dev': {
                 'psr-4': {

@@ -3,4 +3,4 @@ git-crlf "*.bat"
 github-workflow linter-docker
 github-workflow linter-python 3
 github-workflow linter-shell
-license LGPL-3.0-or-later
+license GPL-3.0-or-later

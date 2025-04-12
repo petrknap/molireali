@@ -47,6 +47,7 @@
     "test": [
       "composer update",
       "@check-requirements",
+      "@check-implementation",
       "composer audit --ansi --no-interaction"
     ],
     "check-requirements": [

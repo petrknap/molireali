@@ -29,6 +29,7 @@
     "petrknap/binary": "*",
     "petrknap/critical-section": "*",
     "petrknap/crypto-sodium": "*",
+    "petrknap/data-signer": "*",
     "petrknap/external-filter": "*",
     "petrknap/optional": "*",
     "petrknap/profiler": "*",
